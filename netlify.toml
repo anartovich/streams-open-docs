@@ -22,3 +22,10 @@ command = "bash build.sh -p"
 [dev]
   targetPort = 1313
   port = 1314
+
+[[redirects]]
+  from = "/docs/streams/*"
+  to = "https://amplifystreams-open-docs.netlify.app/docs/:splat"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
