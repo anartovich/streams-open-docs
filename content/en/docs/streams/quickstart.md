@@ -1,7 +1,7 @@
 ---
-title: Get started with Axway Streams (v2 Beta)
+title: Get started with Axway Streams
 linkTitle: Get started
-weight: 2
+weight: 1
 date: 2019-04-02
 description: Learn how to create your first Event-Driven API with Streams.
 ---
@@ -9,8 +9,8 @@ description: Learn how to create your first Event-Driven API with Streams.
 ## Before you start
 
 * Register to Streams Early Adopter Program to get access to Streams and installation materials.
-* Install Streams thanks to the provided helm chart.
 * Read [Understand Streams concepts](/docs/streams/concepts).
+* [Install Streams](/docs/streams/install) in your kubernetes cluster.
 
 ## Objectives
 
@@ -51,11 +51,14 @@ The [HTTP Poller publisher](../publishers/publisher-http-poller) will start to p
 Streams provide different Event-Driven [subscribers](../subscribers) to allow any consumers to subscribe to a topic.
 We will use Streams [SSE Subscriber](../subscribers/subscriber-sse) by simply opening a terminal and running the following cURL command:
 
-```bash
-curl "{baseURL}/subscribers/sse/topics/{topicId}"
+```sh
+export BASE_URL="base-url"
+export TOPIC_ID="topic-id"
+
+curl "${BASE_URL}/subscribers/sse/topics/${TOPIC_ID}"
 ```
 
-`{baseURL}` depends on your deployment configuration. `{topicId}` is the unique identifier of the topic automatically assigned on creation.
+`base-url` depends on your deployment configuration. `topic-id` is the unique identifier of the topic automatically assigned on creation.
 
 If the connection is successfully established, Streams will respond with a `200 OK` and send events through your first Event-Driven API!
 

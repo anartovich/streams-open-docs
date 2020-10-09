@@ -1,8 +1,9 @@
 ---
 title: "Welcome to Axway Streams documentation"
 linkTitle: "Documentation"
-weight: 20
 no_list: true
+hide_readingtime: true
+weight: 10
 menu:
   main:
     weight: 20
