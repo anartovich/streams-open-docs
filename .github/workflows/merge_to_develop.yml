@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   merge-to-develop:
@@ -20,5 +21,6 @@ jobs:
         stable_branch: 'master'
         development_branch: 'develop'
         allow_ff: true
+        ff_only: true
       env:
         GITHUB_TOKEN: ${{ secrets.DOCSBUILDER_TOKEN }}
