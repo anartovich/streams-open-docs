@@ -318,11 +318,17 @@ According to your choice, you must:
 * For security disabled:
     * Set the [Helm parameters](/docs/install/helm-parameters/) `externalizedKafka.auth.clientProtocol` to `plaintext`.
 
+#### Externalized Kafka topics settings
+
+Ensure that `delete.topic.enable` is set to `true` in your [Kafka](https://kafka.apache.org/documentation/#upgrade_100_notable) installation.
+
 ### Embedded Kafka configuration
+
+Embedded Kafka does not require specific configuration, it is enabled by default.
 
 #### Embedded Kafka security settings
 
-For security purposes, it’s highly recommended to enable [SASL authentication](https://docs.confluent.io/current/kafka/authentication_sasl/index.html#authentication-with-sasl) and [TLS encryption](https://docs.confluent.io/current/kafka/encryption.html#encryption-with-ssl) for Kafka clients and brokers. You can enable both or neither.
+For security purposes, it is highly recommended to enable [SASL authentication](https://docs.confluent.io/current/kafka/authentication_sasl/index.html#authentication-with-sasl) and [TLS encryption](https://docs.confluent.io/current/kafka/encryption.html#encryption-with-ssl) for Kafka clients and brokers. You can enable both or neither.
 
 SASL and TLS are enabled by default. As there is no sensitive data in Zookeeper, the communications with Zookeeper are in plaintext without authentication.
 
@@ -376,9 +382,9 @@ Disabling security is not recommended for production.
 
 Depending on your Cloud provider, deploying a load balancer may require additional parameters (refer to your own Cloud provider for further details).
 
-For instance, for AWS, you must define the load balancer type (see the [Reference Architecture](/docs/architecture#load-balancer) for further details with regards to this choice) by setting the [Helm parameters](/docs/install/helm-parameters/) `ingress-nginx-controller.service.annotations.service.beta.kubernetes.io/aws-load-balancer-type` to `nlb`:
+For instance, for AWS, you must define the load balancer type (see the [Reference Architecture](/docs/architecture#load-balancer) for further details with regards to this choice) by setting the [Helm parameters](/docs/install/helm-parameters/) `nginx-ingress-controller.service.annotations.service.beta.kubernetes.io/aws-load-balancer-type` to `nlb`:
 
-* Add `--set "ingress-nginx-controller.service.annotations.service\.beta\.kubernetes\.io/aws-load-balancer-type"="nlb"` in the Helm Chart installation command.
+* Add `--set "nginx-ingress-controller.service.annotations.service\.beta\.kubernetes\.io/aws-load-balancer-type"="nlb"` in the Helm Chart installation command.
 
 ### Ingress hostname
 
@@ -504,7 +510,7 @@ streams-kafka-0                                                1/1     Running  
 streams-mariadb-master-0                                       1/1     Running   0          116s
 streams-zookeeper-0                                            1/1     Running   0          116s
 my-release-hub-675c6f9f6-8gplz                                 1/1     Running   0          116s
-my-release-ingress-nginx-controller-58bfd85658-6plf5           1/1     Running   0          116s
+my-release-nginx-ingress-controller-58bfd85658-6plf5           1/1     Running   0          116s
 my-release-publisher-http-poller-6cc5cd9fc6-q564p              1/1     Running   0          116s
 my-release-publisher-http-post-5b745f864-dpws8                 1/1     Running   0          116s
 my-release-subscriber-sse-7fd8c56f48-wvgtq                     1/1     Running   0          116s
