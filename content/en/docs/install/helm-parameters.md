@@ -50,7 +50,22 @@ description: Use the following parameters to edit your configuration.
 | ingress.host | Domain name used for incoming HTTP requests if `nginx-ingress-controller.enabled` is set to true | yes | N/A |
 | ingress.tlsenabled                    | Enable embedded ingress SSL/TLS     | no        | true          |
 | ingress.tlsSecretName                 | Embedded ingress SSL/TLS certificate secret name | no | streams-ingress-tls-secret |
+| ingress.annotations."nginx.ingress.kubernetes.io/enable-cors" | Enable cross origin requests | no | false |
+| ingress.annotations."nginx.ingress.kubernetes.io/cors-allow-origin" | Allow cross origin requests for the given domains | no | N/A |
+| nginx-ingress-controller.service.annotations."service.beta.kubernetes.io/aws-load-balancer-type" | Request a loadbalancer on AWS. For example, with the "nlb" value) | no | N/A |
 | nginx-ingress-controller.metrics.enabled | Activate metrics endpoint for Ingress controller | no | false |
+
+{{< alert title="Note" >}}
+Annotations parameters require double quotation marks. Meaning that in a Helm values file, `ingress.annotations."nginx.ingress.kubernetes.io/cors-allow-origin"` turns into
+
+```yaml
+ingress:
+  annotations:
+    "nginx.ingress.kubernetes.io/cors-allow-origin": true
+```
+
+If you are setting those parameters through `--set` on the command line, you must escape the dots between the double quotation marks.
+{{< /alert >}}
 
 ## Streams parameters
 
@@ -94,11 +109,11 @@ description: Use the following parameters to edit your configuration.
 | actuator.prometheus.enabled           | Activate metrics endpoints for Streams services | no | false    |
 
 {{< alert title="Note" >}}
-If you want to configure a parameter from a dependency chart ([MariaDB](https://github.com/bitnami/charts/tree/master/bitnami/mariadb), [Kafka](https://github.com/bitnami/charts/tree/master/bitnami/kafka), [Zookeeper](https://github.com/bitnami/charts/tree/master/bitnami/zookeeper) or [Nginx](https://github.com/bitnami/charts/tree/master/bitnami/nginx-ingress-controller)), you must add the chart prefix name to the command line argument. For example:
+To configure a parameter from a dependency chart ([MariaDB](https://github.com/bitnami/charts/tree/master/bitnami/mariadb), [Kafka](https://github.com/bitnami/charts/tree/master/bitnami/kafka), [Zookeeper](https://github.com/bitnami/charts/tree/master/bitnami/zookeeper), or [Nginx](https://github.com/bitnami/charts/tree/master/bitnami/nginx-ingress-controller)), you must add the chart prefix name to the command line argument. For example:
 
 ```
 --set embeddedMariadb.image.tag=latest --set embeddedKafka.replicaCount=2 `
 ```
 
-Please refer to the dependency chart's documentation to get the list of parameters.
+For more information on the list of parameters, see the dependency chart's documentation.
 {{< /alert >}}
