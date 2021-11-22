@@ -18,7 +18,13 @@ It is important, especially when upgrading from an earlier version, to be aware 
 
 The following third-party library has been upgraded:
 
-* MariaDB : `1.4.21`
+* MariaDB : `10.4.21`
+* Apache Kafka : `2.8.1`
+
+### Kafka upgrade
+
+Due to security vulnerabilities, Apache Kafka has been upgraded to version 2.8.1. This upgrade introduces breaking changes in the configuration of embedded kafka.
+SASL configuration are now under `embeddedKafka.auth.sasl`. For more information, see [Helm parameters](/docs/install/helm-parameters/#kafka-parameters).
 
 ## Deprecated features
 <!-- As part of our software development life cycle, we constantly review our Streams offering. -->
