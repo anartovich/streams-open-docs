@@ -1,34 +1,34 @@
 ---
-title: Streams August 2021 Release Notes
-linkTitle: Streams August 2021 Release Notes
-weight: 146
-date: 2021-07-13
+title: Streams November 2021 Release Notes
+linkTitle: Streams November 2021 Release Notes
+weight: 145
+date: 2021-09-03
 ---
 
 ## Summary
 
 Streams is available as a set of Docker containers deployable in Kubernetes by using a Helm chart. For a summary of the system requirements, see [Install Streams](/docs/install/).
 
-## New features and enhancements
-
-### WebSocket Subscriber
-
-A new subscriber has been added to support WebSocket subscription. For more information, see [WebSocket Subscriber](/docs/subscribers/subscriber-websocket).
-
 ## Important changes
 <!-- Use this section to describe any changes in the behavior of the product (as a result of features or fixes), for example, new Java system properties in the jvm.xml file. This section could also be used for any important information that doesn't fit elsewhere. -->
 
 It is important, especially when upgrading from an earlier version, to be aware of the following changes in the behavior or operation of the product in this new version.
 
-### Streams Helm chart enhancements
-
-Kubernetes supported versions are now from 1.19 to 1.21.
-
 ### Streams third-parties
 
 The following third-party library has been upgraded:
 
-* Nginx Ingress Controller: `0.48.1`
+* MariaDB : `10.4.21`
+* Apache Kafka : `2.8.1`
+
+### Embedded Kafka configuration
+
+To address security vulnerabilities, Apache Kafka has been upgraded to version 2.8.1. This upgrade introduces breaking changes in the configuration of embedded kafka - the SASL
+configuration is now in the `embeddedKafka.auth.sasl` block of the Helm values.  For more information, see [Helm parameters](/docs/install/helm-parameters/#kafka-parameters).
+
+We have also changed some internal configuration of the Kafka containers to improve security. There is no visible change unless you have disabled or customized some security of embedded kafka as
+described in [the installation](/docs/install/#embedded-kafka-configuration). In that case, be aware
+that `embeddedKafka.auth.sasl.jaas.clientPasswordSecret` has replaced `embeddedKafka.auth.jaas.existingSecret`.
 
 ## Deprecated features
 <!-- As part of our software development life cycle, we constantly review our Streams offering. -->
