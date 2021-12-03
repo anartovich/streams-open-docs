@@ -563,17 +563,34 @@ my-release-subscriber-webhook-84469bd68f-lqxgk                 1/1     Running  
 [...]
 ```
 
-To check that Streams is running:
+To check that Streams is running, launch the following test command:
 
-1. Import the provided Postman collections and environments.
-2. Select the environment designed for Kubernetes (instead of localhost). It has a variable named `loadBalancerBaseUrl` with the value `<SET_YOUR_HOSTNAME>`. Change this to your hostname (for example, `https://k8s.yourdomain.tld`).
-3. Create a topic with default settings.
-4. Try to subscribe with SSE to your topic:
+```sh
+export NAMESPACE="my-namespace"
+export HELM_RELEASE_NAME="my-release"
+helm test "${HELM_RELEASE_NAME}" -n "${NAMESPACE}"
+```
 
-    ```sh
-    curl "https://k8s.yourdomain.tld/streams/subscribers/sse/api/v1/topics/{TOPIC_ID}"
-    ```
+The output in case of success is:
 
-{{< alert title="Note" >}}
-The default configuration only accepts incoming HTTP/HTTPS requests to `k8s.yourdomain.tld`. For more information, see [Helm parameters](/docs/install/helm-parameters/).
-{{< /alert >}}
+```sh
+NAME: my-namespace
+LAST DEPLOYED: Fri Dec  3 12:30:58 2021
+NAMESPACE: test
+STATUS: deployed
+REVISION: 1
+TEST SUITE:     my-release-smoke-tests
+Last Started:   Fri Dec  3 12:32:32 2021
+Last Completed: Fri Dec  3 12:34:04 2021
+Phase:          Succeeded
+NOTES:
+Validate your installation following the documentation (https://streams-open-docs.netlify.app/docs/install/#validate-the-installation).
+```
+
+If the test is in failure (`Phase : Failed`), check the logs of the `smoke-tests` pod with this command:
+
+```sh
+export NAMESPACE="my-namespace"
+export HELM_RELEASE_NAME="my-release"
+kubectl logs "pod/${HELM_RELEASE_NAME}-smoke-tests" -n "${NAMESPACE}"
+```
