@@ -45,6 +45,9 @@ There are different ways to manage your custom [Helm parameters](/docs/install/h
 
 After you choose one of the options, we recommend you always use it to avoid issues when you [upgrade the helm chart](/docs/install/upgrade/).
 
+> AVN - This brief intro section is OK for experienced users, but even for them I would provide additional explanation for docker registry setting. I would expect that either values.yaml should already include the correct Axway registry hostname, OR there should be an info, for example, "you should receive registry information in an email".
+
+
 ## General conditions for license and subscription services
 
 Axway products and services are governed exclusively by Axway's [General Terms and Conditions](https://www.axway.com/en/legal/contract-documents). To accept them, set the helm value `acceptGeneralConditions` to `"yes"` and proceed with the installation. Ensure to add the double quotation around the `yes` flag.
@@ -63,6 +66,9 @@ kubectl create namespace "${NAMESPACE}"
 Docker images must be hosted in a docker registry accessible from your Kubernetes cluster.
 
 ### Docker registry secret
+
+> AVN - this info is fine if a customer using its own registry. For Axway registry, there should be more info about how a customer will receive this info. FYI, I would assume, that you need to add a link that explain how to create a service account that should be used for this secret.
+
 
 The following code is an example of how to create a Kubernetes registry:
 
